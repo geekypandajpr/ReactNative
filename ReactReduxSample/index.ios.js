@@ -4,7 +4,8 @@
  * @flow
  */
 
-import { AppRegistry } from 'react-native';
-import App from './app/';
 
-AppRegistry.registerComponent('ReactReduxSample', () => App);
+ import { AppRegistry } from 'react-native';
+ import App from './app/'
+
+ AppRegistry.registerComponent('RouterFluxDemo', () => App);
