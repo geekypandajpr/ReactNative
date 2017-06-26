@@ -1,4 +1,4 @@
-package com.routerfluxdemo;
+package com.reactreduxsample;
 
 import android.app.Application;
 
