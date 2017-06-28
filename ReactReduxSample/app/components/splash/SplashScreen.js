@@ -21,7 +21,8 @@ const SplashScreen = (props) => (
 
 function mapStateToProps(state){
     return {
-        recipeCount : state.recipeCount
+        recipeCount : state.recipeCount,
+        routes      : state.routes
     }
 }
 

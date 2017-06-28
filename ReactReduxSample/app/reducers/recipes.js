@@ -8,7 +8,10 @@ export const searchedRecipes = createReducer({}, {
       let id = recipe.href
       newState[id] = Object.assign({}, recipe, { id });
     });
-    return newState;
+    return {
+      ...newState,
+      scene: action.scene,
+    };
   },
 });
 

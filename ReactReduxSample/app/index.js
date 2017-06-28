@@ -3,12 +3,9 @@ import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import AppContainer from './containers/AppContainer';
 
-// create the store
-const store = configureStore({});
-
 const App = () => {
   return (
-    <Provider store={ store }>
+    <Provider store={ configureStore({}) }>
       <AppContainer/>
     </Provider>
   );
