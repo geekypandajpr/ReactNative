@@ -9,25 +9,25 @@ const {
     TouchableHighlight
 } = ReactNative;
 
-
-const SplashScreen = (props) => (
+const HomeScreen = (props) => (
     <View style={ AppStyle.container }>
         <Text style={ AppStyle.welcome }>
-            This is Splash { props.scene } ! Reciepe Count : { props.recipeCount }
+            This is Home Screen
         </Text>
-        <TouchableHighlight onPress={ () => { props.addRecipe() }}>
+        <TouchableHighlight onPress={ () => { props.routes.splash }}>
             <Text style={ AppStyle.welcome } > Click To Increase Counter </Text>
-        </TouchableHighlight>    
-        <TouchableHighlight onPress={ () => { Actions.home() }}>
-            <Text style={ AppStyle.welcome } > Click For Home Screen </Text>
-        </TouchableHighlight>
+        </TouchableHighlight>   
+        <TouchableHighlight onPress={ () => { Actions.splash() }}>
+            <Text style={ AppStyle.welcome } > Back To Splash </Text>
+        </TouchableHighlight> 
     </View>
 );
 
 function mapStateToProps(state){
     return {
-        recipeCount : state.recipeCount
+        recipeCount : state.recipeCount,
+        routes : state.routes
     }
 }
 
-export default connect(mapStateToProps)(SplashScreen);
+export default connect(mapStateToProps)(HomeScreen);

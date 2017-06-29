@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactNative from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Router } from 'react-native-router-flux';
