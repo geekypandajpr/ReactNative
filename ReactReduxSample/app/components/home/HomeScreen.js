@@ -13,48 +13,58 @@ const {
     StyleSheet,
 } = ReactNative;
 
-const HomeScreen = (props) => (
-    <View style={AppStyle.scene}>
-        <View style={AppStyle.searchSection}>
-          <TextInput style={AppStyle.searchInput}
-            returnKeyType="search"
-            placeholder="Ingredients (comma delimited)"
-            onChangeText={(ingredientsInput) => this.setState({ingredientsInput})}
-            value={props.ingredientsInput}
-          />
-          <TouchableHighlight style={AppStyle.searchButton} onPress={ () => props.searchPressed() }>
-            <Text>Fetch Recipes</Text>
-          </TouchableHighlight>
-        </View>
-        <ScrollView style={AppStyle.scrollSection} >
-          {!props.searching && props.recipes().map((recipe) => {
-            return <TouchableHighlight key={recipe.id}  style={AppStyle.searchButton} >
-            <View>
-              <Image source={ { uri: recipe.thumbnail } } style={appStyle.resultImage} />
-              <Text style={ appStyle.resultText } >{recipe.title}</Text>
-            </View>
-          </TouchableHighlight>
-          })}
-          {props.searching ? <Text>Searching...</Text> : null }
-        </ScrollView>
-      </View>
-);
-
-function mapStateToProps(state){
-    return {
-        recipeCount : state.recipeCount,
-        searching: false, 
-        ingredientsInput: '',
-        recipes : function(){
-            return Object.keys(state.searchedRecipes).map(key => state.searchedRecipes[key])
-        },
-        searchPressed : function() {
-            searching = true;
-            state.fetchRecipes(ingredientsInput).then( (res) => {
-                searching =  false;
-            });
-        }
+ class HomeScreen extends Component {
+    constructor(props) {
+        super(props)
+        this.state = { searching: false, ingredientsInput: '' }
     }
+
+    searchPressed() {
+        this.setState({ searching: true })
+        this.props.fetchRecipes(this.state.ingredientsInput).then( (res) => {
+            this.setState({searching: false })
+        });
+    }
+
+    recipes() {
+        return Object.keys(this.props.searchedRecipes).map(key => this.props.searchedRecipes[key])
+    }
+
+
+    render() {
+        return (
+        <View style={AppStyle.scene}>
+            <View style={AppStyle.searchSection}>
+            <TextInput style={AppStyle.searchInput}
+                returnKeyType="search"
+                placeholder="Ingredients (comma delimited)"
+                onChangeText={(ingredientsInput) => this.setState({ingredientsInput})}
+                value={this.state.ingredientsInput}
+            />
+            <TouchableHighlight style={AppStyle.searchButton} onPress={ () => this.searchPressed() }>
+                <Text>Fetch Recipes</Text>
+            </TouchableHighlight>
+            </View>
+            <ScrollView style={AppStyle.scrollSection} >
+            {!this.state.searching && this.recipes().map((recipe) => {
+                return <TouchableHighlight key={recipe.id}  style={AppStyle.searchButton} onPress={ () => this.props.navigate({ key: 'Detail', id: recipe.id}) }>
+                <View>
+                <Image source={ { uri: recipe.thumbnail } } style={appStyle.resultImage} />
+                <Text style={ appStyle.resultText } >{recipe.title}</Text>
+                </View>
+            </TouchableHighlight>
+            })}
+            {this.state.searching ? <Text>Searching...</Text> : null }
+            </ScrollView>
+        </View>
+        )
+    }
+}
+
+function mapStateToProps(state) {
+    return {
+        searchedRecipes: state.searchedRecipes
+    };
 }
 
 
