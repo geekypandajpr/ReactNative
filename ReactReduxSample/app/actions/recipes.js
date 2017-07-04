@@ -21,6 +21,7 @@ export function fetchRecipes(ingredients) {
   }
 }
 
+
 export function setSearchedRecipes({ recipes }) {
   return {
     type: types.SET_SEARCHED_RECIPES,

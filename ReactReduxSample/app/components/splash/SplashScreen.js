@@ -18,13 +18,13 @@ const SplashScreen = (props) => (
         <TouchableHighlight onPress={ () => { props.addRecipe() }}>
             <Text style={ AppStyle.welcome } > Click To Increase Counter </Text>
         </TouchableHighlight>    
-        <TouchableHighlight onPress={ () => { Actions.home() }}>
+        <TouchableHighlight onPress={ Actions.home }>
             <Text style={ AppStyle.welcome } > Click For Home Screen </Text>
         </TouchableHighlight>
-    </View>
+    </View>       
 );
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
         recipeCount : state.recipeCount
     }
